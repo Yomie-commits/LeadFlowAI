@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LeadFlow AI static site generator (a YomieVerse product site).
+LeadFlow AI static site generator (a product by Naomi Mwangi).
 
 Run after changing page copy, header or footer:   python3 build.py
 Email, WhatsApp, booking link and analytics live in assets/js/config.js (no rebuild needed).
@@ -8,7 +8,7 @@ Email, WhatsApp, booking link and analytics live in assets/js/config.js (no rebu
 import json, os, re, datetime
 
 SITE_URL = "https://yomie-commits.github.io/LeadFlowAI"
-YOMIEVERSE_URL = "https://yomie-commits.github.io/Yomie-Verse/"
+PARENT_URL = "https://yomie-commits.github.io/Yomie-Verse/"
 WHATSAPP = "254792002230"
 WHATSAPP_DISPLAY = "+254 792 002 230"
 LINKEDIN = "https://www.linkedin.com/in/naomi-njeri-m/"
@@ -90,21 +90,21 @@ def wa(msg=None):
     return f"https://wa.me/{WHATSAPP}?text={quote(msg or P['wa_msg'])}"
 
 
-YV_MARK = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="yvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#yvg)"/><path d="M11 12l9 10 9-10" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 22v7" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><circle cx="29" cy="28" r="3" fill="#fff"/></svg>'
+YV_MARK = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="yvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#yvg)"/><path d="M9.5 28V12.5l9 15V12.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.5 28V12.5l4.75 8 4.75-8V28" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 EMAIL_LINK = '<a href="#contact" data-email data-email-show>Email us</a>'
 CONTACT = "#contact"
 NAV = [("#features", "Features"), ("#how-it-works", "How it works"), ("#demo", "Demo"), ("#pricing", "Pricing"), ("#faq", "FAQ")]
 
 
 def logo(home="index.html"):
-    return f'<a class="logo" href="{home}" aria-label="{P["name"]} home">{P["logo_svg"]}<span class="lt"><span>{P["name_a"]}<b>{P["name_b"]}</b></span><small>by YomieVerse</small></span></a>'
+    return f'<a class="logo" href="{home}" aria-label="{P["name"]} home">{P["logo_svg"]}<span class="lt"><span>{P["name_a"]}<b>{P["name_b"]}</b></span><small>by Naomi Mwangi</small></span></a>'
 
 
 def parent_bar():
     sib = "".join(f'<a href="{u}">{n}</a>' for n, u in P["siblings"])
     return f'''<div class="parent-bar"><div class="container">
-  <a href="{YOMIEVERSE_URL}" data-track="parent_brand">{YV_MARK}<span>Part of <strong>YomieVerse</strong></span></a>
-  <nav class="sib" aria-label="Other YomieVerse products">{sib}</nav>
+  <a href="{PARENT_URL}" data-track="parent_brand">{YV_MARK}<span>A <strong>Naomi Mwangi</strong> product</span></a>
+  <nav class="sib" aria-label="Other products by Naomi Mwangi">{sib}</nav>
 </div></div>'''
 
 
@@ -133,20 +133,20 @@ def footer(index=True):
       <div>
         {logo()}
         <p class="mt-1">{P["footer_blurb"]}</p>
-        <a class="part-of mt-1" href="{YOMIEVERSE_URL}">{YV_MARK} A YomieVerse product</a>
+        <a class="part-of mt-1" href="{PARENT_URL}">{YV_MARK} A Naomi Mwangi product</a>
       </div>
       <div><h3>{P["name"]}</h3><ul>{prod}<li><a href="{pre}#contact">{P["nav_cta"]}</a></li></ul></div>
-      <div><h3>YomieVerse</h3><ul>
-        <li><a href="{YOMIEVERSE_URL}">YomieVerse home</a></li>{fam}
-        <li><a href="{YOMIEVERSE_URL}services.html">Custom automation</a></li>
-        <li><a href="{YOMIEVERSE_URL}about.html">About</a></li></ul></div>
+      <div><h3>Naomi Mwangi</h3><ul>
+        <li><a href="{PARENT_URL}">Naomi Mwangi home</a></li>{fam}
+        <li><a href="{PARENT_URL}services.html">Custom automation</a></li>
+        <li><a href="{PARENT_URL}about.html">About</a></li></ul></div>
       <div><h3>Contact</h3><ul>
         <li>{EMAIL_LINK.replace('href="#contact"', f'href="{pre}#contact"')}</li>
         <li><a href="{wa()}" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp {WHATSAPP_DISPLAY}</a></li>
         <li><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a></li>
         <li>Nairobi, Kenya</li></ul></div>
     </div>
-    <div class="foot-bottom"><span>&copy; <span data-year>{year}</span> YomieVerse. {P["name"]} is a YomieVerse product.</span><span><a href="privacy.html">Privacy</a> · <a href="sitemap.xml">Sitemap</a></span></div>
+    <div class="foot-bottom"><span>&copy; <span data-year>{year}</span> Naomi Mwangi. {P["name"]} is a product by Naomi Mwangi.</span><span><a href="privacy.html">Privacy</a> · <a href="sitemap.xml">Sitemap</a></span></div>
   </div>
 </footer>
 <a class="wa-float" href="{wa()}" target="_blank" rel="noopener" aria-label="Chat about {P['name']} on WhatsApp" data-track="whatsapp_click">{WA_SVG}</a>'''
@@ -256,7 +256,7 @@ def contact_section():
           <div class="field"><label for="f-phone">Phone number <span class="opt">(optional)</span></label><input id="f-phone" type="tel" name="Phone" autocomplete="tel" maxlength="20" placeholder="+254 7XX XXX XXX"><p class="err" id="e-phone"></p></div>
           <div class="field full"><label for="f-msg">{P["challenge_label"]} <span class="req">*</span></label><textarea id="f-msg" name="Challenge" required minlength="20" maxlength="3000" data-msg="Please tell us a little about what you need." placeholder="{P["challenge_ph"]}"></textarea><p class="hint">A few sentences is plenty.</p><p class="err" id="e-msg"></p></div>
           <fieldset class="field full"><legend>Preferred contact method <span class="req">*</span></legend><div class="seg">{methods}</div><p class="err" id="e-method"></p></fieldset>
-          <div class="field full"><label class="consent"><input type="checkbox" name="Consent" value="Yes" required data-msg="Please confirm so we can reply to you."> I agree that YomieVerse may use these details to respond to my enquiry, as described in the <a href="privacy.html">privacy notice</a>.</label><p class="err" id="e-consent"></p></div>
+          <div class="field full"><label class="consent"><input type="checkbox" name="Consent" value="Yes" required data-msg="Please confirm so we can reply to you."> I agree that Naomi Mwangi may use these details to respond to my enquiry, as described in the <a href="privacy.html">privacy notice</a>.</label><p class="err" id="e-consent"></p></div>
           <div class="full"><button class="btn btn--primary btn--block" type="submit">Send enquiry {ic("arrow")}</button></div>
         </div>
         <div id="form-msg" class="form-msg" hidden></div>
@@ -266,7 +266,7 @@ def contact_section():
         <h2 style="font-size:1.6rem">Thank you<span id="done-name"></span>. Your enquiry has been sent.</h2>
         <p class="muted">Here's what happens next:</p>
         <ol><li>We read your enquiry and look at what you described.</li><li>We contact you by <strong id="done-how">email</strong>, usually within one working day.</li><li>If it's a good fit, we arrange a demo or a short consultation.</li></ol>
-        <div class="btn-row" style="justify-content:center"><a class="btn btn--outline" href="{YOMIEVERSE_URL}">Visit YomieVerse</a><a class="btn btn--wa" href="{wa("Hello, I've just sent a " + P["name"] + " enquiry on your website.")}" target="_blank" rel="noopener" data-track="whatsapp_click">{WA_SVG} Message us on WhatsApp</a></div>
+        <div class="btn-row" style="justify-content:center"><a class="btn btn--outline" href="{PARENT_URL}">Visit Naomi Mwangi&#39;s site</a><a class="btn btn--wa" href="{wa("Hello, I've just sent a " + P["name"] + " enquiry on your website.")}" target="_blank" rel="noopener" data-track="whatsapp_click">{WA_SVG} Message us on WhatsApp</a></div>
       </div>
     </div>
     <aside>
@@ -292,19 +292,19 @@ def build_misc():
 <section class="page-hero" style="text-align:center"><div class="container">
   <span class="eyebrow">Enquiry received</span><h1 style="margin-inline:auto">Thank you, we've received your enquiry</h1>
   <p style="margin-inline:auto">We'll reply using your preferred contact method, usually within one working day. For anything urgent, message us on WhatsApp.</p>
-  <div class="btn-row mt-2" style="justify-content:center"><a class="btn btn--wa" href="{wa()}" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a><a class="btn btn--ghost" href="index.html">Back to {P["name"]}</a><a class="btn btn--ghost" href="{YOMIEVERSE_URL}">Visit YomieVerse</a></div>
+  <div class="btn-row mt-2" style="justify-content:center"><a class="btn btn--wa" href="{wa()}" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a><a class="btn btn--ghost" href="index.html">Back to {P["name"]}</a><a class="btn btn--ghost" href="{PARENT_URL}">Visit Naomi Mwangi&#39;s site</a></div>
 </div></section>''', noindex=True)
     page("404.html", f"Page Not Found | {P['name']}", "Page not found.", f'''
 <section class="page-hero" style="text-align:center"><div class="container">
   <span class="eyebrow">Error 404</span><h1 style="margin-inline:auto">We couldn't find that page</h1>
   <p style="margin-inline:auto">The link may be out of date. Try one of these instead.</p>
-  <div class="btn-row mt-2" style="justify-content:center"><a class="btn btn--primary" href="index.html">{P["name"]} home</a><a class="btn btn--ghost" href="index.html#contact">Contact</a><a class="btn btn--ghost" href="{YOMIEVERSE_URL}">YomieVerse</a></div>
+  <div class="btn-row mt-2" style="justify-content:center"><a class="btn btn--primary" href="index.html">{P["name"]} home</a><a class="btn btn--ghost" href="index.html#contact">Contact</a><a class="btn btn--ghost" href="{PARENT_URL}">Naomi Mwangi</a></div>
 </div></section>''', noindex=True)
-    page("privacy.html", f"Privacy Notice | {P['name']}", f"How {P['name']} and YomieVerse handle the information you share through this website.", f'''
+    page("privacy.html", f"Privacy Notice | {P['name']}", f"How {P['name']} and Naomi Mwangi handle the information you share through this website.", f'''
 <section class="page-hero"><div class="container"><span class="eyebrow">Privacy</span><h1>Privacy notice</h1><p>How we handle the information you share with us through this website.</p></div></section>
 <section class="section"><div class="container narrow">
   <p class="small muted">Last updated: <span class="placeholder">[add date]</span></p>
-  <h2 style="font-size:1.4rem">Who we are</h2><p>{P["name"]} is a product of YomieVerse, based in Nairobi, Kenya. You can contact us by <a href="index.html#contact" data-email>email</a> or on WhatsApp ({WHATSAPP_DISPLAY}).</p>
+  <h2 style="font-size:1.4rem">Who we are</h2><p>{P["name"]} is a product by Naomi Mwangi, based in Nairobi, Kenya. You can contact us by <a href="index.html#contact" data-email>email</a> or on WhatsApp ({WHATSAPP_DISPLAY}).</p>
   <h2 style="font-size:1.4rem">What we collect</h2><p>When you send an enquiry, we receive the details you enter: your name, business name, email address, phone number, your message and your preferred contact method.</p>
   <h2 style="font-size:1.4rem">How we use it</h2><p>Only to respond to your enquiry, arrange demos or consultations, and prepare proposals. We don't sell your information or use it for unrelated marketing.</p>
   <h2 style="font-size:1.4rem">How it is delivered and stored</h2><p>Form submissions are delivered to our email inbox through FormSubmit (formsubmit.co). We keep enquiries only as long as needed to respond and for reasonable business records.</p>
@@ -460,9 +460,9 @@ def build_index():
     svc = {"@context": "https://schema.org", "@type": "Service", "name": "LeadFlow AI", "serviceType": "Lead management and follow-up automation",
            "description": P["footer_blurb"], "url": SITE_URL + "/", "areaServed": ["Kenya", "Worldwide"],
            "brand": {"@type": "Brand", "name": "LeadFlow AI"},
-           "provider": {"@type": "Organization", "name": "YomieVerse", "url": YOMIEVERSE_URL}}
+           "provider": {"@type": "Person", "name": "Naomi Mwangi", "url": PARENT_URL}}
     page("index.html", "LeadFlow AI | Lead Capture, Qualification &amp; Follow-up Automation",
-         "LeadFlow AI captures website and email enquiries, qualifies leads with AI, logs them to your tracker or CRM, reminds you to follow up and reports on your pipeline. A YomieVerse product.",
+         "LeadFlow AI captures website and email enquiries, qualifies leads with AI, logs them to your tracker or CRM, reminds you to follow up and reports on your pipeline. A product by Naomi Mwangi.",
          body, ld=[svc, faq_ld(FAQ)])
 
 
